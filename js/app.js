@@ -7,10 +7,16 @@ class Despesa {
         this.descricao = descricao
         this.valor = valor
     }
+
+    validarDados(){
+        for(let i in this) { //Percorre cada variavel do objeto
+            if(this[i] == undefined || this[i] == '' || this[i] == null) return false
+        }
+        return true
+    }
 }
 
 class Bd {
-
     constructor() {
         let id = localStorage.getItem('id')
 
@@ -43,5 +49,10 @@ function cadastrarDespesa() {
 
     var despesa = new Despesa(ano.value, mes.value, dia.value, tipo.value, descricao.value, valor.value)
 
-    bd.gravar(despesa)
+    if(despesa.validarDados()){
+        bd.gravar(despesa)
+    } else {
+
+    }
+    
 }
