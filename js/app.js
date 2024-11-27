@@ -51,8 +51,9 @@ function cadastrarDespesa() {
 
     if(despesa.validarDados()){
         bd.gravar(despesa)
+        $('#sucessoGravacao').modal('show')
     } else {
-
+        $('#erroGravacao').modal('show')
     }
     
 }
