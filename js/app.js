@@ -8,9 +8,9 @@ class Despesa {
         this.valor = valor
     }
 
-    validarDados(){
-        for(let i in this) { //Percorre cada variavel do objeto
-            if(this[i] == undefined || this[i] == '' || this[i] == null) return false
+    validarDados() {
+        for (let i in this) { //Percorre cada variavel do objeto
+            if (this[i] == undefined || this[i] == '' || this[i] == null) return false
         }
         return true
     }
@@ -20,7 +20,7 @@ class Bd {
     constructor() {
         let id = localStorage.getItem('id')
 
-        if(id === null) {
+        if (id === null) {
             localStorage.setItem('id', 0)
         }
     }
@@ -49,11 +49,21 @@ function cadastrarDespesa() {
 
     var despesa = new Despesa(ano.value, mes.value, dia.value, tipo.value, descricao.value, valor.value)
 
-    if(despesa.validarDados()){
+    if (despesa.validarDados()) {
         bd.gravar(despesa)
-        $('#sucessoGravacao').modal('show')
+        document.getElementById('modal_titulo').innerHTML = 'Registro inserido com sucesso'
+        document.getElementById('modal_titulo_div').className = 'modal-header text-success'
+        document.getElementById('modal_conteudo').innerHTML = 'Despesa foi cadastrada com sucesso'
+        document.getElementById('modal_btn').innerHTML = 'Voltar'
+        document.getElementById('modal_btn').className = 'btn btn-success'
+        $('#modalRegistroDespesa').modal('show')
     } else {
-        $('#erroGravacao').modal('show')
+        document.getElementById('modal_titulo').innerHTML = 'Erro na inclusão do registro'
+        document.getElementById('modal_titulo_div').className = 'modal-header text-danger'
+        document.getElementById('modal_conteudo').innerHTML = 'Erro na gravação, verifique se todos os campos foram preenchidos corretamente'
+        document.getElementById('modal_btn').innerHTML = 'Voltar e corrigir'
+        document.getElementById('modal_btn').className = 'btn btn-danger'
+        $('#modalRegistroDespesa').modal('show')
     }
-    
+
 }
